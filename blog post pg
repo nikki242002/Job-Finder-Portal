@@ -1,1 +1,150 @@
-create A
+import React from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import {
+  Calendar,
+  User,
+  ArrowLeft,
+  ArrowRight,
+  Tag,
+  Folder,
+  Mail,
+} from "lucide-react";
+
+const BlogPostPage = () => {
+  const post = {
+    title: "Top 10 Tips to Land Your Dream Job in 2025",
+    author: "Jane Doe",
+    date: "April 5, 2025",
+    content: `
+      In today’s competitive job market, standing out is more important than ever.
+      Whether you're a fresh graduate or switching careers, these 10 tips can help
+      you craft a standout resume, master interviews, and build your personal brand.
+    `,
+    image:
+      "https://images.unsplash.com/photo-1603575448738-bd3f868ba4a2?auto=format&fit=crop&w=1600&q=80",
+    relatedPosts: [
+      "How to Write a Winning Resume in 2025",
+      "Mastering the Remote Job Interview",
+      "Top 5 Job Portals Every Developer Should Know",
+    ],
+    categories: ["Career Advice", "Remote Jobs", "Interview Tips"],
+    tags: ["Resume", "LinkedIn", "Job Search", "Personal Branding"],
+  };
+
+  return (
+    <div className="max-w-7xl mx-auto p-6 grid grid-cols-1 lg:grid-cols-3 gap-8">
+      {/* Main Blog Content */}
+      <div className="lg:col-span-2">
+        <h1 className="text-4xl font-bold mb-2">{post.title}</h1>
+
+        <div className="flex items-center text-sm text-gray-500 mb-4 space-x-4">
+          <div className="flex items-center gap-1">
+            <User size={16} />
+            <span>{post.author}</span>
+          </div>
+          <div className="flex items-center gap-1">
+            <Calendar size={16} />
+            <span>{post.date}</span>
+          </div>
+        </div>
+
+        <img
+          src={post.image}
+          alt="Blog Visual"
+          className="rounded-2xl w-full h-64 object-cover mb-6 shadow-md"
+        />
+
+        <div className="prose max-w-none text-gray-800 mb-8">
+          <p>{post.content}</p>
+          <h2>1. Tailor Your Resume</h2>
+          <p>
+            Customize your resume to each job description. Highlight skills and achievements relevant to the position.
+          </p>
+          <h2>2. Build an Online Presence</h2>
+          <p>
+            A polished LinkedIn profile and portfolio can set you apart.
+          </p>
+        </div>
+
+        <Card className="p-4 bg-gray-50">
+          <h3 className="text-xl font-semibold mb-2">Related Posts</h3>
+          <ul className="list-disc list-inside space-y-1">
+            {post.relatedPosts.map((item, idx) => (
+              <li key={idx} className="text-blue-600 hover:underline cursor-pointer">
+                {item}
+              </li>
+            ))}
+          </ul>
+        </Card>
+
+        <div className="flex justify-between mt-8">
+          <Button variant="outline">
+            <ArrowLeft className="mr-2" size={16} />
+            Previous Post
+          </Button>
+          <Button>
+            Next Post
+            <ArrowRight className="ml-2" size={16} />
+          </Button>
+        </div>
+      </div>
+
+      {/* Sidebar */}
+      <aside className="space-y-6">
+        {/* Categories */}
+        <Card className="p-4">
+          <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
+            <Folder size={18} /> Categories
+          </h3>
+          <ul className="space-y-2">
+            {post.categories.map((cat, idx) => (
+              <li
+                key={idx}
+                className="text-gray-700 hover:text-blue-600 cursor-pointer"
+              >
+                • {cat}
+              </li>
+            ))}
+          </ul>
+        </Card>
+
+        {/* Tags */}
+        <Card className="p-4">
+          <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
+            <Tag size={18} /> Popular Tags
+          </h3>
+          <div className="flex flex-wrap gap-2">
+            {post.tags.map((tag, idx) => (
+              <span
+                key={idx}
+                className="bg-gray-200 px-2 py-1 text-sm rounded-full hover:bg-blue-200 cursor-pointer"
+              >
+                #{tag}
+              </span>
+            ))}
+          </div>
+        </Card>
+
+        {/* Subscribe */}
+        <Card className="p-4 bg-blue-50">
+          <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
+            <Mail size={18} /> Subscribe
+          </h3>
+          <p className="text-sm text-gray-600 mb-3">
+            Get weekly job tips and blog posts delivered to your inbox.
+          </p>
+          <input
+            type="email"
+            placeholder="Your email"
+            className="w-full p-2 border border-gray-300 rounded-md mb-2"
+          />
+          <Button className="w-full">Subscribe</Button>
+        </Card>
+      </aside>
+    </div>
+  );
+};
+
+export default BlogPostPage;
+
